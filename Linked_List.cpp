@@ -38,6 +38,15 @@ class Linked_List
         }
     }
 
+    void Insert_Tail(int num)
+    {
+        node* temp, *index=head;
+        temp=make_node(num);
+        while(index->next!=NULL)
+            index=index->next;
+        index->next=temp;
+    }
+
     void Display()
     {
         node* temp = head;
@@ -55,7 +64,7 @@ int main()
     Linked_List LL;
     while(1)
     {
-    cout<<"\n1 to insert at head, 2 to display linked list, 3 to quit"<<endl;
+    cout<<"\n1 to insert at head, 2 to display linked list, 3 to insert at tail, 4 to quit"<<endl;
     cin>>val;
     if(val==1)
     {
@@ -66,8 +75,13 @@ int main()
     if(val==2)
         LL.Display();
     if(val==3)
+    {
+        cout<<"Enter value to be Inserted: ";
+        cin>>num;
+        LL.Insert_Tail(num);
+    }
+    if(val==4)
         break;
-
 
     }
 }

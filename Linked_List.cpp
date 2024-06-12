@@ -47,6 +47,98 @@ class Linked_List
         index->next=temp;
     }
 
+    int Size()
+    {
+        node* index = head;
+        int count=0;
+        while(index!=NULL)
+        {
+            index = index->next;
+            count++;
+        }
+        return count;
+    }
+
+    void Insert_Pos(int num, int pos)
+    {
+        if(pos==0)
+        {
+            Insert_Head(num);
+            return;
+        }
+        if(pos>=Size())
+        {
+            cout<<"\nInvalid Index";
+            return;
+        }
+        else
+        {
+            node* temp = make_node(num);
+            node *index = head, *store;
+            for(int i=0;i<pos;i++)
+            {
+                store=index;
+                index=index->next;
+            }
+            store->next=temp;
+            temp->next=index;
+        }
+        return;
+
+    }
+
+    void Delete_Pos(int pos)
+    {
+        if(pos==0)
+        {
+            node* temp = head;
+            head=head->next;
+            delete(temp);
+            return;
+        }
+
+        if(pos>=Size())
+        {
+            cout<<"\nOut of Bound Index";
+            return;
+        }
+        else
+        {
+            node *index = head, *store;
+            for(int i=0;i<pos;i++)
+            {
+                store=index;
+                index=index->next;
+            }
+            store->next=index->next;
+            delete(index);
+        }
+        return;
+    }
+
+    void Sort()
+    {
+        node* index=head;
+        int swap=0, temp;
+        while(1)
+        {
+            swap=0;
+            for(index=head;index->next!=NULL;index=index->next)
+            {
+                if(index->val > index->next->val)
+                {
+                    temp=index->val; 
+                    index->val=index->next->val;
+                    index->next->val=temp; 
+                    swap=1;
+                }
+            }
+            if(!swap)
+                break;
+        }
+        return;
+    }
+
     void Display()
     {
         node* temp = head;
@@ -60,28 +152,70 @@ class Linked_List
 
 int main()
 {
-    int val,num;
+    int val,pos,op;
     Linked_List LL;
     while(1)
     {
-    cout<<"\n1 to insert at head, 2 to display linked list, 3 to insert at tail, 4 to quit"<<endl;
-    cin>>val;
-    if(val==1)
-    {
-        cout<<"Enter value to be Inserted: ";
-        cin>>num;
-        LL.Insert_Head(num);
-    }
-    if(val==2)
-        LL.Display();
-    if(val==3)
-    {
-        cout<<"Enter value to be Inserted: ";
-        cin>>num;
-        LL.Insert_Tail(num);
-    }
-    if(val==4)
-        break;
+        cout<<"\n\n--------Commands--------\n";
+        cout<<"Press 1 to Insert at Head\n";
+        cout<<"Press 2 to Insert at Tail\n";
+        cout<<"Press 3 to Insert at Other Position\n";
+        cout<<"Press 4 to Check size of List\n";
+        cout<<"Press 5 to Delete at Any Position\n";
+        cout<<"Press 6 to Sort the List\n";
+        cout<<"Press 7 to Display the List\n";
+        cout<<"Press 8 to Exit\n";
+        cout<<"Enter Option: ";
+        cin>> op;
+        switch(op)
+        {
+            case 1:
+            cout<<"\nEnter Value: ";
+            cin>>val;
+            LL.Insert_Head(val);
+            break;
 
+            case 2:
+            cout<<"\nEnter Value: ";
+            cin>>val;
+            LL.Insert_Tail(val);
+            break;
+
+            case 3:
+            cout<<"\nEnter Value: ";
+            cin>>val;
+            cout<<"\nEnter Position: ";
+            cin>>pos;
+            LL.Insert_Pos(val,pos);
+            break;
+
+            case 4:
+            cout<<"\nSize of List is: "<<LL.Size();
+            break;
+
+            case 5:
+            cout<<"\nEnter Position: ";
+            cin>>pos;
+            LL.Delete_Pos(pos);
+            break;
+
+            case 6:
+            cout<<"\nSorting the List";
+            LL.Sort();
+            break;
+
+            case 7:
+            cout<<"\nDisplaying the List: ";
+            LL.Display();
+            break;
+
+            case 8:
+            return 0;
+
+            default:
+            cout<<"\nInvalid Number Pressed";
+            break;  
+        }
     }
+    return 0;
 }

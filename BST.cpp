@@ -71,6 +71,21 @@ class BST
         }
     }
 
+    void Delete(int num)
+    {
+        node* temp= Search(num);
+        if(temp==NULL)
+            return;
+        if(temp->left == NULL && temp->right == NULL)
+        {
+            cout<<"\nSucess";
+            delete(temp);
+            return;
+        }
+        
+    }
+
+
     node* Search(int num)
     {
         node* index=root;
@@ -106,6 +121,58 @@ class BST
         return index->val;
     }
 
+    int Successor(int num)
+    {
+        node* temp = Search(num);
+        if(temp==NULL)
+            return -1;
+        if(temp->right != NULL)
+        {
+            node* index=temp->right;
+            while(index->left!=NULL)
+                index=index->left;
+            return index->val;
+        }
+        else
+        {
+            while(temp==temp->parent->right)
+                temp=temp->parent;
+            if(temp->parent==NULL)
+            {
+                cout<<"\nNo Successor found in BST";
+                return -1;
+            }
+            else
+                return temp->parent->val;
+        }
+    }
+
+    int Predecessor(int num)
+    {
+        node* temp = Search(num);
+        if(temp==NULL)
+            return -1;
+        if(temp->left != NULL)
+        {
+            node* index=temp->left;
+            while(index->right!=NULL)
+                index=index->right;
+            return index->val;
+        }
+        else
+        {
+            while(temp==temp->parent->left)
+                temp=temp->parent;
+            if(temp->parent==NULL)
+            {
+                cout<<"\nNo Predecessor found in BST";
+                return -1;
+            }
+            else
+                return temp->parent->val;
+        }
+    }
+
 };
 
 
@@ -138,7 +205,7 @@ int main()
             case 2:
             cout<<"\nEnter Value: ";
             cin>>val;
-            //Tree.Delete(val);
+            Tree.Delete(val);
             break;
 
             case 3:
@@ -156,9 +223,15 @@ int main()
             break;
 
             case 6:
+            cout<<"\nEnter Value: ";
+            cin>>val;
+            cout<<"\nSuccessor of value is: "<<Tree.Successor(val);
             break;
 
             case 7:
+            cout<<"\nEnter Value: ";
+            cin>>val;
+            cout<<"\nPredecessor of value is: "<<Tree.Predecessor(val);
             break;
 
             case 8:

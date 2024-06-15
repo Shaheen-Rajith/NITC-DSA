@@ -6,5 +6,5 @@ Trying to relearn everything from DSA and learn git along the way too ig
 - Classes **(DONE)**
 - Sorting (Bubble, Insertion, Merge, Quick) **(DONE)**
 - Stacks, Queues, Linked Lists **(DONE)**
-- Trees **(WORK IN PROGRESS)**
+- Trees **(NEARLY DONE)**
 - Graphs (Making, BFS, DFS, Prims, Kruskals)

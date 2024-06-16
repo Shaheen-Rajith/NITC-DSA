@@ -120,7 +120,6 @@ class BST
         {
             if(index->val==num)
             {
-                cout<<"\nValue Found in BST";
                 return index;
             }
             if(index->val>=num)
@@ -238,7 +237,8 @@ int main()
             case 3:
             cout<<"\nEnter Value: ";
             cin>>val;
-            Tree.Search(val);
+            if(Tree.Search(val)!=NULL)
+                cout<<"\nValue found in BST";
             break;
 
             case 4:

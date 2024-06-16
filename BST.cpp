@@ -71,16 +71,43 @@ class BST
         }
     }
 
-    void Delete(int num)
+    void Delete(node* temp)
     {
-        node* temp= Search(num);
         if(temp==NULL)
             return;
         if(temp->left == NULL && temp->right == NULL)
         {
-            cout<<"\nSucess";
             delete(temp);
             return;
+        }
+
+        else if(temp->left == NULL && temp->right != NULL)
+        {
+            temp->right->parent = temp->parent;
+            if(temp==temp->parent->left)
+                temp->parent->left=temp->right;
+            else
+                temp->parent->right=temp->right;
+            delete(temp);
+            return;
+        }
+
+        else if(temp->left != NULL && temp->right == NULL)
+        {
+            temp->left->parent = temp->parent;
+            if(temp==temp->parent->left)
+                temp->parent->left=temp->left;
+            else
+                temp->parent->right=temp->right;
+            delete(temp);
+            return;
+        }
+
+        else
+        {
+            node* Succ = Search(Successor(temp->val));
+            temp->val = Succ->val;
+            Delete(Succ);
         }
         
     }
@@ -205,7 +232,7 @@ int main()
             case 2:
             cout<<"\nEnter Value: ";
             cin>>val;
-            Tree.Delete(val);
+            Tree.Delete(Tree.Search(val));
             break;
 
             case 3:

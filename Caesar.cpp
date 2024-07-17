@@ -13,8 +13,8 @@ string Caesar(string text, int key, bool encrypt)
         {
             if(*it>='a' && *it<='z')
             {
-                ret.push_back(*it+=key);
-                if(*it>'z')
+                ret.push_back(*it+key);
+                if(*it+key>'z')
                 {
                     ret.pop_back();
                     ret.push_back(*it+key-26);
@@ -23,31 +23,19 @@ string Caesar(string text, int key, bool encrypt)
 
             else if(*it>='A' && *it<='Z')
             {
-                ret.push_back(*it+=key);
-                if(*it>'Z')
+                ret.push_back(*it+key);
+                if(*it+key>'Z')
                 {
                     ret.pop_back();
                     ret.push_back(*it+key-26);
                 }
             }
-
-
-            else if(*it>='0' && *it<='9')
-            {
-                ret.push_back(*it+=key);
-                if(*it>'9')
-                {
-                    ret.pop_back();
-                    ret.push_back(*it+key-10);
-                }
-            }
-
+            
             else
             {
                 ret.push_back(*it);
             }
 
-            
         }
     }
 
@@ -57,32 +45,21 @@ string Caesar(string text, int key, bool encrypt)
         {
             if(*it>='a' && *it<='z')
             {
-                ret.push_back(*it-=key);
-                if(*it<'a')
+                ret.push_back(*it-key);
+                if(*it-key<'a')
                 {
                     ret.pop_back();
-                    ret.push_back(*it+key+26);
+                    ret.push_back(*it-key+26);
                 }
             }
 
             else if(*it>='A' && *it<='Z')
             {
-                ret.push_back(*it-=key);
-                if(*it<'A')
+                ret.push_back(*it-key);
+                if(*it-key<'A')
                 {
                     ret.pop_back();
-                    ret.push_back(*it+key+26);
-                }
-            }
-
-
-            else if(*it>='0' && *it<='9')
-            {
-                ret.push_back(*it-=key);
-                if(*it<'0')
-                {
-                    ret.pop_back();
-                    ret.push_back(*it+key+10);
+                    ret.push_back(*it-key+26);
                 }
             }
 
